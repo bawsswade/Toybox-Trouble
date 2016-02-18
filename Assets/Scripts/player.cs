@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class player_movement : MonoBehaviour {
+public class player : MonoBehaviour {
 
     // params for animations
     public float speed = 60f;
@@ -24,22 +24,22 @@ public class player_movement : MonoBehaviour {
     // Called once every frame of rigid body
     void Update()
     {
-        Vector2 _vel = new Vector3(0, 0);
-        if (Input.GetKey(KeyCode.LeftArrow))
+        Vector2 _vel = new Vector3(0,0);
+        if(Input.GetKey(KeyCode.A))
         {
             _vel.x -= speed;
         }
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.D))
         {
             _vel.x += speed;
         }
         rb2d.AddForce(_vel);
-        if (Input.GetKeyDown(KeyCode.UpArrow) /*&& isGrounded*/)
+        if (Input.GetKeyDown(KeyCode.W) /*&& isGrounded*/)
         {
             //rb2d.velocity = new Vector2(rb2d.velocity.x,  jumpStr);
             rb2d.AddForce(Vector2.up * jumpStr, ForceMode2D.Impulse);
         }
-
-
+       
+        
     }
 }

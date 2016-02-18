@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\moveFaster.cs" />
     <Compile Include="Assets\Scripts\moveSlower.cs" />
+    <Compile Include="Assets\Scripts\player.cs" />
     <Compile Include="Assets\Scripts\player_movement.cs" />
     <Compile Include="Assets\Scripts\setChar.cs" />
   </ItemGroup>
