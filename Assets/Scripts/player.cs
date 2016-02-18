@@ -6,11 +6,12 @@ public class player : MonoBehaviour {
     // params for animations
     public float speed = 60f;
     public float jumpStr;
-    //public bool isGrounded = false;
+    public bool isGrounded = false;
     public float maxVel = 10;
 
     // moving the rigid body
     private Rigidbody2D rb2d;
+    private int jumpCount;
     //private Animator anim;
 
     // Use this for initialization
@@ -19,6 +20,8 @@ public class player : MonoBehaviour {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         //anim = gameObject.GetComponent<Animator>();
         jumpStr = 30f;
+        jumpCount = 0;
+        isGrounded = false;
     }
 
     // Called once every frame of rigid body
@@ -34,12 +37,21 @@ public class player : MonoBehaviour {
             _vel.x += speed;
         }
         rb2d.AddForce(_vel);
-        if (Input.GetKeyDown(KeyCode.W) /*&& isGrounded*/)
+        if (Input.GetKeyDown(KeyCode.W) && jumpCount < 2)
         {
-            //rb2d.velocity = new Vector2(rb2d.velocity.x,  jumpStr);
+            isGrounded = false;
             rb2d.AddForce(Vector2.up * jumpStr, ForceMode2D.Impulse);
+            jumpCount++;
         }
-       
-        
+        if(Input.GetKeyDown(KeyCode.S) && isGrounded)
+        {
+            rb2d.transform.Translate(Vector3.down * 1f);
+        }    
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        isGrounded = true;
+        jumpCount = 0;
     }
 }

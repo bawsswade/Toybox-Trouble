@@ -1,21 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class moveSlower : MonoBehaviour {
+public class lowGrav : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        //Debug.Log(other.name + " moving slower");
         player_movement p = other.GetComponent<player_movement>();
         if (p == null)
         {
             player p2 = other.GetComponent<player>();
-            p2.jumpStr = 70f;
+            p2.speed = 30f;
         }
         else
         {
-            p.jumpStr = 70f;
+            p.speed = 30f;
         }
-        other.GetComponent<Rigidbody2D>().drag = 10f;
     }
 }
