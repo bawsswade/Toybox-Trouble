@@ -2,6 +2,10 @@
 using System.Collections;
 
 public class moveFaster : MonoBehaviour {
+    void Start()
+    {
+        this.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, .3f);
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         player_movement p = other.GetComponent<player_movement>();

@@ -16,9 +16,8 @@ public class cameraFollow : MonoBehaviour {
     {
         //player = GameObject.FindWithTag("character");
         pList = GameObject.FindGameObjectsWithTag("character");
-        minCamPos = new Vector3(-33f, -10f, -10);
-        maxCamPos = new Vector3(1f, 1f, -10);
-        
+        //minCamPos = new Vector3(-33f, -10f, -10);
+        //maxCamPos = new Vector3(1f, 1f, -10);
     }
 
     // Update is called once per frame

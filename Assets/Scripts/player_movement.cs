@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// for patches
 public class player_movement : MonoBehaviour {
 
-    // params for animations
+    public Sprite jumpL, jumpR, idleL, idleR;
+
+    public GameObject projR, projL;
     public float speed = 60f;
     public float jumpStr;
     public bool isGrounded = false;
@@ -12,6 +15,7 @@ public class player_movement : MonoBehaviour {
 
     // moving the rigid body
     private Rigidbody2D rb2d;
+    private Sprite s;
     //private Animator anim;
 
     // Use this for initialization
@@ -46,9 +50,36 @@ public class player_movement : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.DownArrow) && isGrounded)
         {
-            rb2d.transform.Translate(Vector3.down * 1f);
+            rb2d.transform.Translate(Vector3.down * 1.5f);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Backslash))
+        {
+            if (rb2d.velocity.x < 0)
+                Instantiate(projL, this.transform.position, Quaternion.identity);
+            else
+                Instantiate(projR, this.transform.position, Quaternion.identity);
         }
     }
+
+    void FixedUpdate()
+    {
+        if(rb2d.velocity.x < 0)
+        {
+            if (isGrounded)
+                this.gameObject.GetComponent<SpriteRenderer>().sprite = idleL;
+            else
+                this.gameObject.GetComponent<SpriteRenderer>().sprite = jumpL;
+        }
+        else
+        {
+            if(isGrounded)
+                this.gameObject.GetComponent<SpriteRenderer>().sprite = idleR;
+            else
+                this.gameObject.GetComponent<SpriteRenderer>().sprite = jumpR;
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
         isGrounded = true;

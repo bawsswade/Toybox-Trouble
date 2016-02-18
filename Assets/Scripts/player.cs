@@ -3,6 +3,8 @@ using System.Collections;
 
 public class player : MonoBehaviour {
 
+    public Sprite jumpL, jumpR, idleL, idleR;
+    public GameObject projL, projR;
     // params for animations
     public float speed = 60f;
     public float jumpStr;
@@ -45,8 +47,33 @@ public class player : MonoBehaviour {
         }
         if(Input.GetKeyDown(KeyCode.S) && isGrounded)
         {
-            rb2d.transform.Translate(Vector3.down * 1f);
-        }    
+            rb2d.transform.Translate(Vector3.down * 1.5f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (rb2d.velocity.x < 0)
+                Instantiate(projL, this.transform.position, Quaternion.identity);
+            else
+                Instantiate(projR, this.transform.position, Quaternion.identity);
+        }
+    }
+    void FixedUpdate()
+    {
+        if (rb2d.velocity.x < 0)
+        {
+            if (isGrounded)
+                this.gameObject.GetComponent<SpriteRenderer>().sprite = idleL;
+            else
+                this.gameObject.GetComponent<SpriteRenderer>().sprite = jumpL;
+        }
+        else
+        {
+            if (isGrounded)
+                this.gameObject.GetComponent<SpriteRenderer>().sprite = idleR;
+            else
+                this.gameObject.GetComponent<SpriteRenderer>().sprite = jumpR;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D col)

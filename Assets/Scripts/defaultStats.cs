@@ -3,6 +3,10 @@ using System.Collections;
 
 public class defaultStats : MonoBehaviour {
 
+    void Start()
+    {
+        this.GetComponent<SpriteRenderer>().color = new Color(1,1,1, .3f);
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log(other.name + " in low grav");
